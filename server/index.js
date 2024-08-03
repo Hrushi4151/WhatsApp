@@ -17,7 +17,7 @@ const app = express();
 
 app.use(cors());
 app.use(cors({
-  origin: 'http://localhost:3000', // Allow only this origin
+  origin: "https://whatsapp-iota-nine.vercel.app/", // Allow only this origin
   methods: 'GET,POST', // Allow only these methods
   allowedHeaders: 'Content-Type,Authorization' // Allow only these headers
 }));
@@ -35,7 +35,7 @@ const server = app.listen(5001, () => {
 
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "https://whatsapp-iota-nine.vercel.app/",
      methods: 'GET,POST',
   allowedHeaders: 'Content-Type,Authorization' ,
   },
