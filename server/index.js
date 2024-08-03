@@ -136,21 +136,9 @@ const __dirname = path.resolve();
 dotenv.config();
 const app = express();
 
-// Define the allowed origins
-const allowedOrigins = [
-  'http://localhost:3000', // Development
-  'https://whatsapp-iota-nine.vercel.app' // Production
-];
-
-// Configure CORS
+// Configure CORS to allow all origins
 app.use(cors({
-  origin: function(origin, callback) {
-    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+  origin: '*', // Allow all origins
   methods: 'GET,POST',
   allowedHeaders: 'Content-Type,Authorization',
   credentials: true
@@ -170,7 +158,7 @@ const server = app.listen(5001, () => {
 
 const io = new Server(server, {
   cors: {
-    origin: allowedOrigins,
+    origin: '*', // Allow all origins
     methods: ["GET", "POST"],
     credentials: true
   }
@@ -228,23 +216,5 @@ io.on("connection", (socket) => {
   });
 
   socket.on("reject-voice-call", (data) => {
-    const sendUserSocket = global.onlineUsers.get(data.from);
-    if (sendUserSocket) {
-      socket.to(sendUserSocket).emit("voice-call-rejected");
-    }
-  });
+    const 
 
-  socket.on("reject-video-call", (data) => {
-    const sendUserSocket = global.onlineUsers.get(data.from);
-    if (sendUserSocket) {
-      socket.to(sendUserSocket).emit("video-call-rejected");
-    }
-  });
-
-  socket.on("accept-incoming-call", (id) => {
-    const sendUserSocket = global.onlineUsers.get(id);
-    if (sendUserSocket) {
-      socket.to(sendUserSocket).emit("accept-call");
-    }
-  });
-});
