@@ -16,6 +16,11 @@ dotenv.config();
 const app = express();
 
 app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000', // Allow only this origin
+  methods: 'GET,POST', // Allow only these methods
+  allowedHeaders: 'Content-Type,Authorization' // Allow only these headers
+}));
 app.use(express.json());
 
 app.use('/uploads/recordings', express.static(path.join(__dirname, 'uploads/recordings')));
