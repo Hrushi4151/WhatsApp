@@ -1,5 +1,5 @@
 
-export const HOST="http://localhost:5001";
+export const HOST="https://whatsappserver-xcyx.onrender.com";
 
 const AUTH_ROUTE=`${HOST}/api/auth`;
 const MESSAGE_ROUTE=`${HOST}/api/messages`
